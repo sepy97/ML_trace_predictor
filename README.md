@@ -7,5 +7,7 @@ Prediction is based on various features: previous traces, frequency of choosing 
 
 ## Participants:
 Sam Pyankov (sepy97)
+
 Alexandra Maria Degen
+
 Karim Kassem Barada 
