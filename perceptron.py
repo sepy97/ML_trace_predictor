@@ -1,33 +1,34 @@
 import numpy as np
 
 class perceptron:
-
+    def __init__(self, num_features, num_classes):
+        self.classes = range(num_classes) 
+        self.weights = np.zeros(num_features, num_classes) 
     
-    learning_rate = 0.01
-    epochs = 100
-    input_size = 2
-    weights = np.zeros(input_size+1)
-    bias = 0
+    def predict(self, data_point):
+        # return class label (one of self.classes) based on class data point
+        max_product = 0.0
+        max_class = -1
+        for c in self.classes:
+            product = np.dot(self.weights[:,c], data_point)
+            if product > max_product:
+                max_product = product
+                max_class = c
+        return max_class
 
-    def __init__(self, input_size, learning_rate, epochs):
-        self.learning_rate = learning_rate
-        self.epochs = epochs
-        self.weights = np.zeros(input_size+1)
-        self.bias = 0
+    def fit(self, data_point, label):
+        # update weights based on data point and label
+        max_product = 0.0
+        max_class = -1
+        for c in self.classes:
+            product = np.dot(self.weights[:,c], data_point)
+            if product > max_product:
+                max_product = product
+                max_class = c
+        if max_class != label:
+            # update weights
+            self.weights[:,label] += data_point
+            self.weights[:,max_class] -= data_point
+        
+        return
 
-    def activation_fn(self, x):
-        return 1 if x >= 0 else 0
-
-    def predict(self, x):
-        z = np.dot(x, self.weights) + self.bias
-        a = self.activation_fn(z)
-        return a
-
-    def fit(self, X, y):
-        for _ in range(self.epochs):
-            for i in range(X.shape[0]):
-                x = np.insert(X[i], 0, 1)
-                y_pred = self.predict(x)
-                update = self.learning_rate * (y[i] - y_pred)
-                self.weights += update * x
-                self.bias += update
