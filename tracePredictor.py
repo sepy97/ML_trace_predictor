@@ -21,13 +21,19 @@ class tracePredictor:
             if trace_id == self.test_labels[i]:
                 correct += 1
             total += 1
-        return float(correct)/float(total)
+        self.test_error = 1.0 - float(correct)/float(total)
+        return self.test_error
 
     def train(self):
         # loop through data in training dataset, call model.fit() on each data point, return training error
         for i in range(len(self.training_dataset)):
             self.model.fit(self.training_dataset[i], self.training_labels[i])
+        total = len(self.training_dataset)
+        incorrect = 0
         for i in range(len(self.training_dataset)):
-            if self.model.predict(self.training_dataset[i]) != self.training_labels[i]:
-                self.training_error += 1
+            trace_id = self.model.predict(self.training_dataset[i])
+            if trace_id != self.training_labels[i]:
+                print ("Incorrect prediction: ", trace_id, " instead of ", self.training_labels[i], " on dataset: ", self.training_dataset[i]) # print the incorrect prediction
+                incorrect += 1
+        self.training_error = float(incorrect)/float(total)
         return self.training_error
