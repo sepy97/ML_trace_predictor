@@ -5,8 +5,8 @@ import numpy as np
 
 num_of_features = 5
 num_of_classes = 4
-#filePath = 'datafiles/ifthenelse/predictionAccuracy.csv'
-filePath = 'datafiles/libquantum/predictionAccuracy.csv'
+filePath = 'datafiles/ifthenelse/predictionAccuracy.csv'
+#filePath = 'datafiles/libquantum/predictionAccuracy.csv'
 
 features, labels = features.generateTraceFeatures(filePath, num_of_features)
 print ("Features: ", features.shape, " Labels: ", labels.shape)

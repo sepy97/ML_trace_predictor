@@ -4,7 +4,7 @@ import numpy as np
 class perceptron:
     def __init__(self, num_features, num_classes):
         self.classes = np.arange(0, num_classes, 1) 
-        self.weights = np.zeros((num_classes, num_features+1))
+        self.weights = np.zeros((num_classes, num_features*num_classes+1))
         # loss should be a sigma function
         self.prob = lambda x: 1/(1+np.exp(-x)) # sigmoid function
         self.initStep = 1e-1
@@ -18,6 +18,7 @@ class perceptron:
         max_class = -1
         # Compute max_class as the class with the highest np.dot product between the data point and the weights
         max_class = np.argmax(np.dot(self.weights, data_point))
+        #print("Weights: ", self.weights)
         return max_class
 
     def fit(self, data_point, label): 

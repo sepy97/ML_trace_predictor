@@ -34,6 +34,6 @@ class tracePredictor:
         dataset = self.training_dataset
         labels  = self.training_labels
         M,N = dataset.shape
-        dataset = np.hstack((np.ones((M,1)), dataset))
+        dataset = np.hstack((np.zeros((M,1)), dataset))
         self.training_error = self.model.fit(dataset, labels)
         return self.training_error
