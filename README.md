@@ -10,4 +10,4 @@ Sam Pyankov (sepy97)
 
 Karim Kassem Barada (karimbarada8)
 
-Kotaro Yamada
+Kotaro Yamada (yamakou34)
