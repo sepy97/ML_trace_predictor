@@ -4,7 +4,7 @@ import numpy as np
 class perceptron:
     def __init__(self, num_features, num_classes):
         self.classes = np.arange(0, num_classes, 1) 
-        self.weights = np.zeros((num_classes, num_features*num_classes+1))
+        self.weights = np.zeros((num_classes, num_features+1))
         # loss should be a sigma function
         self.prob = lambda x: 1/(1+np.exp(-x)) # sigmoid function
         self.initStep = 1e-1
