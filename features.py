@@ -27,14 +27,15 @@ def generateTraceFeatures (filePath, num_of_features, num_of_classes):
         for line in f:
             line = line.split(',')
             line.pop() # remove newline
-            feature_window.append(int(line[-1]))
             if skip_lines > 0:
+                feature_window.append(int(line[-1]))
                 skip_lines -= 1
                 continue
-            feature_window.pop(0) 
             transformed_feature = transformFeatures(feature_window, num_of_classes)
             features.append(transformed_feature)
             labels.append(int(line[-1]))
+            feature_window.append(int(line[-1]))
+            feature_window.pop(0)
     features = np.array(features)
     labels = np.array(labels)
     return (features, labels)
@@ -63,14 +64,15 @@ def generateBincodeTraceFeatures (filePath, num_of_features, num_of_classes):
         for line in f:
             line = line.split(',')
             line.pop() # remove newline
-            feature_window.append(int(line[-1]))
             if skip_lines > 0:
+                feature_window.append(int(line[-1]))
                 skip_lines -= 1
                 continue
-            feature_window.pop(0)
             transformed_feature = bincodeTransform(feature_window, num_of_classes)
             features.append(transformed_feature)
             labels.append(int(line[-1]))
+            feature_window.append(int(line[-1]))
+            feature_window.pop(0)
     features = np.array(features)
     labels = np.array(labels)
     return (features, labels)
@@ -89,14 +91,15 @@ def generateTraceFeaturesWithoutTransform (filePath, num_of_features, num_of_cla
         for line in f:
             line = line.split(',')
             line.pop() # remove newline
-            feature_window.append(float(line[-1]))
             if skip_lines > 0:
+                feature_window.append(float(line[-1]))
                 skip_lines -= 1
                 continue
-            feature_window.pop(0)
             feature_copy = feature_window.copy()
             features.append(feature_copy)
             labels.append(int(line[-1]))
+            feature_window.append(float(line[-1]))
+            feature_window.pop(0)
     features = np.array(features)
     labels = np.array(labels)
     return (features, labels)
